@@ -148,6 +148,13 @@
 				}
 			},
 			"core/pullquote": {
+				"elements": {
+					"cite": {
+						"typography": {
+							"fontSize": "var(--wp--preset--font-size--medium)"
+						}
+					}
+				},
 				"spacing": {
 					"padding": {
 						"bottom": "var(--wp--preset--spacing--50)",
@@ -156,12 +163,6 @@
 				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--large)"
-				},"elements": {
-					"cite": {
-						"typography": {
-							"fontSize": "var(--wp--preset--font-size--medium)"
-						}
-					}
 				}
 			}
 		},
@@ -253,4 +254,13 @@
 			"title": "Sidebar"
 		}
 	]
+	,"customTemplates": [
+	{
+		"name": "full-width-page",
+		"title": "Full Width Page",
+		"postTypes": [
+			"page"
+		]
+	}
+]
 }
