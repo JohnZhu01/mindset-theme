@@ -1,4 +1,7 @@
 <?php
+// Load custom blocks.
+require get_theme_file_path() . '/mindset-blocks/mindset-blocks.php';
+
 /**
  * Theme setup and front-end assets.
  *
