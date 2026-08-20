@@ -31,32 +31,28 @@ function mindset_register_php_blocks()
 add_action('init', 'mindset_register_php_blocks');
 
 /**
- * Render all published Service posts.
+ * Render published Service posts grouped by Service Category terms.
  *
  * @return string Rendered block markup.
  */
 function mindset_render_service_posts($attributes)
 {
-    $service_navigation_query = new WP_Query(
-        array(
-            'post_type' => 'fwd-service',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'no_found_rows' => true,
-            'update_post_meta_cache' => false,
-            'update_post_term_cache' => false,
-        )
-    );
-
     $wrapper_attributes = get_block_wrapper_attributes(
         array(
             'class' => 'service-posts',
         )
     );
 
-    if (!$service_navigation_query->have_posts()) {
+    $service_terms = get_terms(
+        array(
+            'taxonomy' => 'fwd-service-category',
+            'hide_empty' => true,
+            'orderby' => 'name',
+            'order' => 'ASC',
+        )
+    );
+
+    if (is_wp_error($service_terms) || empty($service_terms)) {
         return sprintf(
             '<div %1$s><p>%2$s</p></div>',
             $wrapper_attributes,
@@ -72,11 +68,10 @@ function mindset_render_service_posts($attributes)
                 aria-label="<?php esc_attr_e('Services', 'mindset-theme'); ?>"
             >
                 <?php
-                while ($service_navigation_query->have_posts()) {
-                    $service_navigation_query->the_post();
+                foreach ($service_terms as $service_term) {
                     ?>
-                        <a href="#post-<?php the_ID(); ?>">
-                            <?php the_title(); ?>
+                        <a href="#service-category-<?php echo esc_attr($service_term->slug); ?>">
+                            <?php echo esc_html($service_term->name); ?>
                         </a>
                         <?php
                 }
@@ -84,37 +79,59 @@ function mindset_render_service_posts($attributes)
             </nav>
 
             <?php
-            wp_reset_postdata();
+            foreach ($service_terms as $service_term) {
+                $service_query = new WP_Query(
+                    array(
+                        'post_type' => 'fwd-service',
+                        'post_status' => 'publish',
+                        'posts_per_page' => -1,
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'no_found_rows' => true,
+                        'update_post_meta_cache' => false,
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'fwd-service-category',
+                                'field' => 'term_id',
+                                'terms' => $service_term->term_id,
+                            ),
+                        ),
+                    )
+                );
 
-            $service_query = new WP_Query(
-                array(
-                    'post_type' => 'fwd-service',
-                    'post_status' => 'publish',
-                    'posts_per_page' => -1,
-                    'orderby' => 'title',
-                    'order' => 'ASC',
-                    'no_found_rows' => true,
-                    'update_post_meta_cache' => false,
-                    'update_post_term_cache' => false,
-                )
-            );
-
-            while ($service_query->have_posts()) {
-                $service_query->the_post();
+                if (!$service_query->have_posts()) {
+                    continue;
+                }
                 ?>
-                    <article id="post-<?php the_ID(); ?>" class="service-post">
-                        <h2 class="service-post__title">
-                            <?php the_title(); ?>
+                    <section
+                        id="service-category-<?php echo esc_attr($service_term->slug); ?>"
+                        class="service-posts__category"
+                    >
+                        <h2 class="service-posts__category-title">
+                            <?php echo esc_html($service_term->name); ?>
                         </h2>
 
-                        <div class="service-post__content">
-                            <?php the_content(); ?>
-                        </div>
-                    </article>
-                    <?php
-            }
+                        <?php
+                        while ($service_query->have_posts()) {
+                            $service_query->the_post();
+                            ?>
+                                <article id="post-<?php the_ID(); ?>" class="service-post">
+                                    <h3 class="service-post__title">
+                                        <?php the_title(); ?>
+                                    </h3>
 
-            wp_reset_postdata();
+                                    <div class="service-post__content">
+                                        <?php the_content(); ?>
+                                    </div>
+                                </article>
+                            <?php
+                        }
+                        ?>
+                    </section>
+                    <?php
+
+                wp_reset_postdata();
+            }
             ?>
         </div>
         <?php
