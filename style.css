@@ -1,7 +1,7 @@
 /*
 Theme Name: Mindset Theme
 Theme URI: https://johnzhu.ca
-Author:Johnny 
+Author:Johnny
 Author URI: https://johnzhu.ca
 Description: A theme for building the Mindset site for FWDP 3600
 Requires at least: 7.0
@@ -23,6 +23,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	html {
 		scroll-behavior: auto;
 	}
@@ -41,9 +42,35 @@ html {
 	transition: opacity 0.3s ease;
 }
 
-
-
 /* Scroll to top animation */
 .scroll-top svg path {
-	fill: currentColor;
+	fill: currentcolor;
+}
+
+/* Service posts */
+.service-posts {
+	display: grid;
+	gap: 2rem;
+}
+
+.service-posts__navigation {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding-block: 1rem;
+	border-block-end: 1px solid currentcolor;
+}
+
+.service-post {
+	padding-block: 2rem;
+	border-block-end: 1px solid currentcolor;
+	scroll-margin-block-start: 2rem;
+}
+
+.service-post__title {
+	margin-block-start: 0;
+}
+
+.service-post__content > :last-child {
+	margin-block-end: 0;
 }
