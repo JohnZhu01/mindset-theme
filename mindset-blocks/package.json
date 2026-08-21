@@ -19,7 +19,8 @@
 		"@wordpress/blocks": "latest",
 		"@wordpress/components": "latest",
 		"@wordpress/core-data": "latest",
-		"@wordpress/i18n": "latest"
+		"@wordpress/i18n": "latest",
+		"swiper": "^14.1.0"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^34.1.0"
