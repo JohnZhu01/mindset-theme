@@ -1,22 +1,19 @@
-/**
- * Swiper dependencies
- *
- * @see https://swiperjs.com/get-started
- */
-// Import Swiper JS bundle with all modules installed.
 import Swiper from "swiper/bundle";
 
 /**
- * Initialize the slider.
+ * Initialize one testimonial slider.
  *
- * @param {Element} container HTMLElement.
- * @param {Object}  options   Slider parameters.
+ * @param {Element} container Slider element.
+ * @param {Object}  options   Slider settings.
+ * @param {Element} block     Slider block wrapper.
  *
- * @return {Object} Returns initialized slider instance.
- *
- * @see https://swiperjs.com/swiper-api#parameters
+ * @return {Swiper} Swiper instance.
  */
-export function SwiperInit(container, options = {}) {
+export function SwiperInit(container, options = {}, block = container) {
+	const nextButton = block.querySelector(".swiper-button-next");
+	const previousButton = block.querySelector(".swiper-button-prev");
+	const pagination = block.querySelector(".swiper-pagination");
+
 	const parameters = {
 		loop: true,
 		autoHeight: true,
@@ -28,12 +25,20 @@ export function SwiperInit(container, options = {}) {
 				spaceBetween: 20,
 			},
 		},
-		navigation: options?.navigation
-			? { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
-			: { enabled: false },
-		pagination: options?.pagination
-			? { el: ".swiper-pagination", clickable: true }
-			: { enabled: false },
+		navigation:
+			options.navigation && nextButton && previousButton
+				? {
+						nextEl: nextButton,
+						prevEl: previousButton,
+					}
+				: false,
+		pagination:
+			options.pagination && pagination
+				? {
+						el: pagination,
+						clickable: true,
+					}
+				: false,
 	};
 
 	return new Swiper(container, parameters);

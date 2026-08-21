@@ -6,14 +6,18 @@
  */
 
 $swiper_settings = array(
-	'pagination' => ! empty( $attributes['pagination'] ),
-	'navigation' => ! empty( $attributes['navigation'] ),
+	'pagination' => !empty($attributes['pagination']),
+	'navigation' => !empty($attributes['navigation']),
+);
+
+$wrapper_attributes = get_block_wrapper_attributes(
+	array(
+		'data-swiper-settings' => wp_json_encode($swiper_settings),
+	)
 );
 ?>
-<div <?php echo get_block_wrapper_attributes(); ?>>
-	<script>
-		const swiper_settings = <?php echo wp_json_encode( $swiper_settings ); ?>;
-	</script>
+<div <?php echo $wrapper_attributes; ?>>
+	
 	<?php
 	$args  = array(
 		'post_type'      => 'fwd-testimonial',
@@ -41,8 +45,12 @@ $swiper_settings = array(
 		<?php endif; ?>
 
 		<?php if ( ! empty( $attributes['navigation'] ) ) : ?>
-			<button class="swiper-button-prev"></button>
-			<button class="swiper-button-next"></button>
+	<button
+	type="button"
+	class="swiper-button-prev"
+	aria-label="<?php esc_attr_e('Previous testimonial', 'testimonial-slider'); ?>"></button>
+	<button type="button" class="swiper-button-next"
+		aria-label="<?php esc_attr_e('Next testimonial', 'testimonial-slider'); ?>"></button>
 		<?php endif; ?>
 		<?php
 		wp_reset_postdata();

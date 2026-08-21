@@ -16,5 +16,15 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "render": "file:./render.php",
-  "viewScript": "file:./view.js"
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "pagination": {
+      "type": "boolean",
+      "default": true
+    },
+    "navigation": {
+      "type": "boolean",
+      "default": true
+    }
+  }
 }

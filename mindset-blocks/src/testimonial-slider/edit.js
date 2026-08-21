@@ -40,10 +40,10 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...useBlockProps()}>
-				<div className="swiper swiper-initialized swiper-horizontal swiper-autoheight swiper-backface-hidden">
-					<div className="swiper-wrapper">
-						<div className="swiper-slide">
-							<figure class="wp-block-pullquote">
+				<div classNameName="swiper swiper-initialized swiper-horizontal swiper-autoheight swiper-backface-hidden">
+					<div classNameName="swiper-wrapper">
+						<div classNameName="swiper-slide">
+							<figure className="wp-block-pullquote">
 								<blockquote>
 									<p>
 										This is a placeholder that will be replaced with your actual
@@ -57,19 +57,19 @@ export default function Edit({ attributes, setAttributes }) {
 				</div>
 				{pagination && (
 					<>
-						<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-							<span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
-							<span class="swiper-pagination-bullet"></span>
-							<span class="swiper-pagination-bullet"></span>
-							<span class="swiper-pagination-bullet"></span>
+						<div className="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+							<span className="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+							<span className="swiper-pagination-bullet"></span>
+							<span className="swiper-pagination-bullet"></span>
+							<span className="swiper-pagination-bullet"></span>
 						</div>
 					</>
 				)}
 				{navigation && (
 					<>
-						<div className="swiper-button-prev">
+						<div classNameName="swiper-button-prev">
 							<svg
-								className="swiper-navigation-icon"
+								classNameName="swiper-navigation-icon"
 								width="11"
 								height="20"
 								viewBox="0 0 11 20"
@@ -82,9 +82,9 @@ export default function Edit({ attributes, setAttributes }) {
 								></path>
 							</svg>
 						</div>
-						<div className="swiper-button-next">
+						<div classNameName="swiper-button-next">
 							<svg
-								className="swiper-navigation-icon"
+								classNameName="swiper-navigation-icon"
 								width="11"
 								height="20"
 								viewBox="0 0 11 20"
