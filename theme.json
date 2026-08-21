@@ -261,6 +261,11 @@
 			"area": "uncategorized",
 			"name": "sidebar",
 			"title": "Sidebar"
+		},
+		{
+			"area": "uncategorized",
+			"name": "sidebar-testimonials",
+			"title": "Testimonials Sidebar"
 		}
 	]
 }

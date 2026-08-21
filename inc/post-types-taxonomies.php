@@ -104,7 +104,7 @@ function mindset_register_custom_post_types()
 	);
 
 	register_post_type('fwd-service', $service_args);
-
+// -------Testimonials-----//
 	$testimonial_labels = array(
 		'name' => _x('Testimonials', 'post type general name', 'mindset-theme'),
 		'singular_name' => _x('Testimonial', 'post type singular name', 'mindset-theme'),
@@ -249,6 +249,63 @@ function mindset_register_taxonomies()
 	);
 
 	register_taxonomy('fwd-service-category', array('fwd-service'), $args);
+
+	// Add Testimonial Category taxonomy.
+	$labels = array(
+		'name' => _x('Testimonial Categories', 'taxonomy general name', 'mindset-theme'),
+		'singular_name' => _x('Testimonial Category', 'taxonomy singular name', 'mindset-theme'),
+		'search_items' => __('Search Testimonial Categories', 'mindset-theme'),
+		'all_items' => __('All Testimonial Categories', 'mindset-theme'),
+		'parent_item' => __('Parent Testimonial Category', 'mindset-theme'),
+		'parent_item_colon' => __('Parent Testimonial Category:', 'mindset-theme'),
+		'edit_item' => __('Edit Testimonial Category', 'mindset-theme'),
+		'view_item' => __('View Testimonial Category', 'mindset-theme'),
+		'update_item' => __('Update Testimonial Category', 'mindset-theme'),
+		'add_new_item' => __('Add New Testimonial Category', 'mindset-theme'),
+		'new_item_name' => __('New Testimonial Category Name', 'mindset-theme'),
+		'template_name' => __('Testimonial Category Archives', 'mindset-theme'),
+		'menu_name' => __('Testimonial Categories', 'mindset-theme'),
+		'not_found' => __('No testimonial categories found.', 'mindset-theme'),
+		'no_terms' => __('No testimonial categories', 'mindset-theme'),
+		'items_list_navigation' => __('Testimonial Categories list navigation', 'mindset-theme'),
+		'items_list' => __('Testimonial Categories list', 'mindset-theme'),
+		'item_link' => __('Testimonial Category Link', 'mindset-theme'),
+		'item_link_description' => __('A link to a testimonial category.', 'mindset-theme'),
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_in_rest' => true,
+		'show_admin_column' => true,
+		'hierarchical' => true,
+		'rewrite' => array('slug' => 'testimonial-categories'),
+	);
+
+	register_taxonomy('fwd-testimonial-category', array('fwd-testimonial'), $args);
+	// Add Featured taxonomy.
+	$labels = array(
+		'name' => __('Featured', 'mindset-theme'),
+		'singular_name' => __('Featured', 'mindset-theme'),
+		'search_items' => __('Search Featured', 'mindset-theme'),
+		'all_items' => __('All Featured', 'mindset-theme'),
+		'edit_item' => __('Edit Featured', 'mindset-theme'),
+		'update_item' => __('Update Featured', 'mindset-theme'),
+		'add_new_item' => __('Add New Featured', 'mindset-theme'),
+		'new_item_name' => __('New Featured Name', 'mindset-theme'),
+		'menu_name' => __('Featured', 'mindset-theme'),
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_in_rest' => true,
+		'show_admin_column' => true,
+		'hierarchical' => true,
+		'rewrite' => array('slug' => 'featured'),
+	);
+
+	register_taxonomy('fwd-featured', array('fwd-testimonial'), $args);
 }
 add_action('init', 'mindset_register_taxonomies');
 /**
